@@ -9,7 +9,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'LunarWatcher/auto-pairs'
 " Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-repeat'
-" Plug 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 " window automatic resizing. :help lens
 Plug 'camspiers/lens.vim'
 " :help sneak
@@ -20,19 +20,15 @@ Plug 'https://github.com/mileszs/ack.vim'
 " dependecy for vim-markdown.
 Plug 'godlygeek/tabular'
 " Org Mode
-Plug 'https://github.com/jceb/vim-orgmode'
-Plug 'https://github.com/tpope/vim-speeddating'
 " command runner
 Plug 'https://github.com/skywind3000/asyncrun.vim'
 
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'https://github.com/bfrg/vim-c-cpp-modern'
-Plug 'https://github.com/preservim/vim-indent-guides.git'
 " Filetypes
 Plug 'HiPhish/guile.vim'
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
-Plug 'preservim/vim-markdown'
 Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
@@ -54,7 +50,6 @@ Plug 'https://github.com/cocopon/iceberg.vim.git'
 call plug#end()
 " Builtins
 runtime! ftplugin/man.vim
-runtime ftplugin/markdown.vim
 runtime gtags
 "###############################################################################
 " Options
@@ -116,9 +111,11 @@ set conceallevel=0
 syntax enable
 set termguicolors
 set background=dark
-colorscheme gruvbox
-hi Normal guibg=NONE ctermbg=NONE
+colorscheme solarized
 let g:solarized_termcolors=256
+if !has('gui_running')
+  hi Normal guibg=NONE ctermbg=NONE
+endif
 "Session
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,terminal
 " Completion
@@ -136,19 +133,25 @@ set directory=~/.cache/vim/
 
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:vim_asciidoctor_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
-
+let g:typst_folding = 1
+let g:asciidoc_folding = 1
 let g:vim_markdown_auto_insert_bullets = 1
 let g:vim_markdown_new_list_item_indent = 2
-let g:vim_markdown_conceal = 2
-let g:markdown_folding = 1
+let g:vim_markdown_conceal = 3
+let g:markdown_folding = 6
 let g:markdown_recommended_style = 0
 
-"let g:ft_man_open_mode = 'vert'
+" Org Mode
+let g:org_prefer_insert_mode = 1
+let g:org_aggressive_conceal = 0
+let g:org_indent = 0
+let g:org_heading_shade_leading_stars = 1
+let g:ft_man_open_mode = 'tab'
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'solarized',
   \ }" Plugins
-let g:rainbow_active = 0
+let g:rainbow_active = 1
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 let g:fzf_colors =
@@ -171,14 +174,12 @@ function! s:build_quickfix_list(lines)
   copen
   cc
 endfunction
+" use <Tab> to select items, and then C-q to build quickfix
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-let g:lens#width_resize_min = 20
-let g:lens#animate = 0
-let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'man']
 let g:indent_guides_default_mapping = 0
 
@@ -217,8 +218,8 @@ noremap <Leader>qk <cmd>Maps<CR>
 noremap <Leader>ql <cmd>set background=light<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
-noremap <Leader>f <cmd>Files<CR>
-noremap <Leader>F <cmd>GFiles<CR>
+noremap <Leader>f <cmd>GFiles<CR>
+noremap <Leader>F <cmd>Files<CR>
 noremap <leader>b <cmd>Buffers<CR>
 noremap <leader>B <cmd>Windows<CR>
 noremap <Leader>l <cmd>BLines<CR>
@@ -260,5 +261,7 @@ map <Down> <nop>
 " Quickfix Keybindings
 noremap <leader>c <cmd>copen<CR>
 noremap <leader>C <cmd>cclose<CR>
-noremap <Tab>j <cmd>cnext<CR>
-noremap <Tab>k <cmd>cprevious<CR>
+noremap ]q <cmd>cnext<CR>
+noremap [q <cmd>cprevious<CR>
+" copy to wayland clipoard
+vnoremap <leader><leader> :!wl-copy<CR>u
