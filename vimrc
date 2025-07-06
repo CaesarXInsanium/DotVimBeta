@@ -36,6 +36,7 @@ Plug 'https://github.com/kaarmu/typst.vim'
 "Lisp/Scheme
 Plug 'eraserhd/parinfer-rust'
 " Colorschemes
+Plug 'https://github.com/ayu-theme/ayu-vim.git'
 Plug 'https://github.com/joshdick/onedark.vim'
 Plug 'https://github.com/morhetz/gruvbox.git'
 Plug 'ericbn/vim-solarized'
@@ -64,7 +65,7 @@ set encoding=UTF-8
 " Buffer Tabs
 
 
-set nu
+set nonu
 set rnu
 " Text Tabs
 set shiftwidth=2
