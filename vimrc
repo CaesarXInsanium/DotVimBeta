@@ -22,6 +22,7 @@ Plug 'godlygeek/tabular'
 " Org Mode
 " command runner
 Plug 'https://github.com/skywind3000/asyncrun.vim'
+Plug 'https://github.com/lervag/vimtex'
 
 " UI
 Plug 'ryanoasis/vim-devicons'
@@ -38,7 +39,6 @@ Plug 'eraserhd/parinfer-rust'
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
 Plug 'https://github.com/joshdick/onedark.vim'
-Plug 'https://github.com/morhetz/gruvbox.git'
 Plug 'ericbn/vim-solarized'
 Plug 'sainnhe/everforest'
 Plug 'relastle/bluewery.vim'
@@ -47,6 +47,10 @@ Plug 'https://github.com/rose-pine/vim'
 Plug 'https://github.com/catppuccin/vim'
 Plug 'https://github.com/nordtheme/vim.git'
 Plug 'https://github.com/cocopon/iceberg.vim.git'
+Plug 'https://github.com/romainl/flattened'
+Plug 'https://github.com/nikolvs/vim-sunbather'
+Plug 'https://github.com/nvimdev/oceanic-material'
+Plug 'https://github.com/kratuvid/vim9-gruvbox'
 " plugins under consideration" vim-slime
 call plug#end()
 " Builtins
@@ -57,10 +61,13 @@ runtime gtags
 "###############################################################################
 set nocp 
 set guifont=ZedMono\ Nerd\ Font\ 15
+set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175"
 set laststatus=2
 set noshowmode 
+" set foldenable should be filetype option
 set nofoldenable
 set encoding=UTF-8
+set clipboard+=unnamedplus
 
 " Buffer Tabs
 
@@ -90,14 +97,13 @@ set incsearch
 set hlsearch 
 set incsearch 
 
-set grepprg=rg\ --vimgrep
+set grepprg=rg\ --vimgrep\ --glob=!tags
 set keywordprg=:Man
 set shell=/bin/bash
 " Backup
 set nobackup
 set backupext=.bak
 set backupdir=~/.cache/vim
-set guicursor=i:ver25-iCursor
 " Mouse
 if has('mouse')
   set mouse=nva
@@ -132,6 +138,9 @@ set directory=~/.cache/vim/
 " VARIABLES
 "###############################################################################" Variables"###############################################################################
 
+
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_method = 'pdflatex'
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:vim_asciidoctor_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:typst_folding = 1
@@ -142,11 +151,10 @@ let g:vim_markdown_conceal = 3
 let g:markdown_folding = 6
 let g:markdown_recommended_style = 0
 
-" Org Mode
-let g:org_prefer_insert_mode = 1
-let g:org_aggressive_conceal = 0
-let g:org_indent = 0
-let g:org_heading_shade_leading_stars = 1
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+endif
+
 let g:ft_man_open_mode = 'tab'
 
 let g:lightline = {
@@ -191,7 +199,7 @@ let g:sexp_enable_insert_mode_mappings = 0
 " see :help autogroup
 augroup vimrcEx" autocmd
   au!
-  autocmd FileType text setlocal textwidth=78
+  autocmd FileType text setlocal textwidth=80
 augroup END
 
 autocmd FileType .guile set ft=scheme
@@ -214,9 +222,9 @@ noremap <Leader>sP <cmd>PlugClean<CR>
 " Vim Bindings" reload 
 noremap <Leader>qr <cmd>source ~/.vim/vimrc<CR>
 noremap <Leader>qc <cmd>Colors<CR> 
-noremap <Leader>qp <cmd>PlugInstall<CR>
 noremap <Leader>qk <cmd>Maps<CR>
 noremap <Leader>ql <cmd>set background=light<CR>
+noremap <Leader>qL <cmd>set background=dark<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
 noremap <Leader>f <cmd>GFiles<CR>
@@ -225,6 +233,7 @@ noremap <leader>b <cmd>Buffers<CR>
 noremap <leader>B <cmd>Windows<CR>
 noremap <Leader>l <cmd>BLines<CR>
 noremap <Leader>L <cmd>Lines<CR>
+noremap <leader>a <cmd>Ack<CR>
 noremap <Leader>g <cmd>RG<CR>
 noremap <leader>G <cmd>Ag<CR>
 noremap <leader>m <cmd>Marks<CR>
@@ -234,8 +243,6 @@ noremap <leader>J <cmd>History<CR>
 noremap <leader>h <cmd>Helptags<CR>
 noremap <leader>H <cmd>nohlsearch<CR>
 noremap <leader>t <cmd>Tags<CR>
-" search for instances of word under cursor
-noremap <leader>k <cmd>Ack<CR>
 
 noremap <Leader><Leader> <cmd>tab split<CR>
 noremap <Leader>` <cmd>tabnew<CR>
@@ -265,4 +272,3 @@ noremap <leader>C <cmd>cclose<CR>
 noremap ]q <cmd>cnext<CR>
 noremap [q <cmd>cprevious<CR>
 " copy to wayland clipoard
-vnoremap <leader><leader> :!wl-copy<CR>u
