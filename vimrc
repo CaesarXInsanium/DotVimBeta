@@ -1,4 +1,4 @@
-"##############################################################################" 
+"##############################################################################"
 " Plugins
 ""##############################################################################
 " must be listed first
@@ -6,6 +6,9 @@ call plug#begin()
 " Essential
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'skim-rs/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'https://github.com/vim-autoformat/vim-autoformat'
+" disabled in Lispy files and markdown
 Plug 'LunarWatcher/auto-pairs'
 " Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-repeat'
@@ -15,14 +18,10 @@ Plug 'camspiers/lens.vim'
 " :help sneak
 Plug 'justinmk/vim-sneak'
 Plug 'https://github.com/itchyny/lightline.vim'
-" project searcher
+" project searcher. very simple, very useful
 Plug 'https://github.com/mileszs/ack.vim'
-" dependecy for vim-markdown.
-Plug 'godlygeek/tabular'
-" Org Mode
 " command runner
 Plug 'https://github.com/skywind3000/asyncrun.vim'
-Plug 'https://github.com/lervag/vimtex'
 
 " UI
 Plug 'ryanoasis/vim-devicons'
@@ -41,10 +40,6 @@ Plug 'https://github.com/ayu-theme/ayu-vim.git'
 Plug 'https://github.com/joshdick/onedark.vim'
 Plug 'ericbn/vim-solarized'
 Plug 'sainnhe/everforest'
-Plug 'relastle/bluewery.vim'
-Plug 'https://github.com/haishanh/night-owl.vim.git'
-Plug 'https://github.com/rose-pine/vim'
-Plug 'https://github.com/catppuccin/vim'
 Plug 'https://github.com/nordtheme/vim.git'
 Plug 'https://github.com/cocopon/iceberg.vim.git'
 Plug 'https://github.com/romainl/flattened'
@@ -59,11 +54,11 @@ runtime gtags
 "###############################################################################
 " Options
 "###############################################################################
-set nocp 
+set nocp
 set guifont=ZedMono\ Nerd\ Font\ 15
 set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175"
 set laststatus=2
-set noshowmode 
+set noshowmode
 " set foldenable should be filetype option
 set nofoldenable
 set encoding=UTF-8
@@ -94,8 +89,8 @@ set backspace=eol,start,nostop,indent
 " Search
 set ignorecase
 set incsearch
-set hlsearch 
-set incsearch 
+set hlsearch
+set incsearch
 
 set grepprg=rg\ --vimgrep\ --glob=!tags
 set keywordprg=:Man
@@ -152,31 +147,31 @@ let g:markdown_folding = 6
 let g:markdown_recommended_style = 0
 
 if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
+  let g:ackprg = 'rg --vimgrep --glob=!tags'
 endif
 
 let g:ft_man_open_mode = 'tab'
 
 let g:lightline = {
       \ 'colorscheme': 'solarized',
-  \ }" Plugins
+      \ }" Plugins
 let g:rainbow_active = 1
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
@@ -185,10 +180,10 @@ function! s:build_quickfix_list(lines)
 endfunction
 " use <Tab> to select items, and then C-q to build quickfix
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'man']
 let g:indent_guides_default_mapping = 0
 
@@ -198,8 +193,8 @@ let g:sexp_enable_insert_mode_mappings = 0
 "###############################################################################
 " see :help autogroup
 augroup vimrcEx" autocmd
-  au!
-  autocmd FileType text setlocal textwidth=80
+au!
+autocmd FileType text setlocal textwidth=80
 augroup END
 
 autocmd FileType .guile set ft=scheme
@@ -208,34 +203,32 @@ autocmd FileType .guile set ft=scheme
 au FileType rust,vimscript set mps+=<:>
 au FileType lisp,scheme set mps-=':'
 "##############################################################################
-"" Keybindings 
+"" Keybindings
 "##############################################################################
 " set map Leader to <Space>
 let g:mapleader = " "
 let g:localleader = " "
 
-noremap <Leader>ss <cmd>mksession! .session<CR>
-noremap <Leader>sl <cmd>source .session<CR>
-noremap <Leader>sd <cmd>!rm .session<CR>
 noremap <Leader>sp <cmd>PlugInstall<CR>
 noremap <Leader>sP <cmd>PlugClean<CR>
-" Vim Bindings" reload 
+" Vim Bindings" reload
 noremap <Leader>qr <cmd>source ~/.vim/vimrc<CR>
-noremap <Leader>qc <cmd>Colors<CR> 
+noremap <Leader>qc <cmd>Colors<CR>
 noremap <Leader>qk <cmd>Maps<CR>
 noremap <Leader>ql <cmd>set background=light<CR>
 noremap <Leader>qL <cmd>set background=dark<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
-noremap <Leader>f <cmd>GFiles<CR>
-noremap <Leader>F <cmd>Files<CR>
+noremap <Leader>f <cmd>FZF<CR>
+noremap <Leader>F <cmd>SK<CR>
 noremap <leader>b <cmd>Buffers<CR>
 noremap <leader>B <cmd>Windows<CR>
 noremap <Leader>l <cmd>BLines<CR>
 noremap <Leader>L <cmd>Lines<CR>
 noremap <leader>a <cmd>Ack<CR>
+" ALT-A to select all ALT-D to deselect
+" use Rg <search-pattern> manually on command line
 noremap <Leader>g <cmd>RG<CR>
-noremap <leader>G <cmd>Ag<CR>
 noremap <leader>m <cmd>Marks<CR>
 noremap <leader>j <cmd>Jumps<CR>
 noremap <leader><C-j> <cmd>Commands<CR>

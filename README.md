@@ -1,6 +1,13 @@
 # Vim Notes
 
-Currently on 5.7 in manual
+~Currently on 5.7 in manual~
+
+Working on other things. Thing to take notes on.
+
+- Vim sneak or some other thing
+- output compiler errors into GNU grep format for quick errorfile stuff
+- QF list preview
+- move this repo to NOT github
 
 I will now be trying to master the vim text editor for real now. I think I
 should not try and
@@ -37,7 +44,7 @@ useful help topics
 - eval.txt: learn about vimscript
 - function-list:
 - options
-  - `:help 'number'`
+- `:help 'number'`
 
 it is possible to get help with builtin key binding
 
@@ -154,7 +161,7 @@ with the "a" key it is possible to operate on text objects
 
 - "daw" will delete the word the cursor is on, regardless of exact position
 - "cis" will delete `c`, the text object `i`, `s` a sentence
-  delete the current sentence and enter insert mode
+delete the current sentence and enter insert mode
 
 ### Replace Mode
 
@@ -162,7 +169,7 @@ with the "a" key it is possible to operate on text objects
 
 - backspace will 'undo' the replacement.
 - after overriting characters is reached then the next chars will be added after
-  wards
+wards
 
 ## Visual Mode
 
@@ -196,14 +203,14 @@ I will try and focus on things that I did not previously know
 Remember that prepending a number before a command will repeat x number of times.
 
 - "J" will join lines, delete the newline
-  - sdassad
-    sdasdas
+- sdassad
+sdasdas
 - "u" undoes a thing
-  - "<C->r" will redo the thing
-  - "U" will undo all changes to line
+- "<C->r" will redo the thing
+- "U" will undo all changes to line
 - "o" will inser line below and goto it, "O" will do the same above
 - "xp" swap to characters next to each other. deletes character, then paste it after
-  the cursor, in this case it moved to next character
+the cursor, in this case it moved to next character
 
 ### Movement
 
@@ -252,10 +259,10 @@ We can move there with "'<char>". "'a" will go to mark a.
 Here are some extra marks
 
 ```text
-'	The cursor position before doing a jump
-"	The cursor position when last editing the file
-[	Start of the last change
-]	End of the last change
+'   The cursor position before doing a jump
+"   The cursor position when last editing the file
+[   Start of the last change
+]   End of the last change
 ```
 
 ### View
@@ -344,7 +351,7 @@ There are two types, global and filetype specific. It is just a vimscript file
 that is loaded on vim startup.
 
 - 'standard-plugin-list' is a list of vimscript functionallity packaged with vim
-  but not compiled in in C
+but not compiled in in C
 - 'load-plugin' will show information on how plugins are loaded
 
 The correct way to install plugins is to get a uncompress copy and to paste it into
@@ -413,8 +420,8 @@ ready to be seen to be edited. most useful commands
 
 ```c
 int main (void){
-  printf("Hello World!\n");
-  return 0;
+    printf("Hello World!\n");
+    return 0;
 }
 ```
 
@@ -441,8 +448,8 @@ with some mappings and so the mappings pluggins is added to make it no so painfu
 ### How to build quickfix?
 
 1. select items
-  - <Alt-a> for everything
-  - <Tab> for invidual item
+- <Alt-a> for everything
+- <Tab> for invidual item
 2. <Ctrl-q> to build quickfix
 
 # Using Vim Editor as IDE
