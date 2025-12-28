@@ -1,7 +1,7 @@
 setlocal conceallevel=2
 setlocal spell
-setlocal textwidth=90
-setlocal colorcolumn=90
+setlocal textwidth=80
+setlocal colorcolumn=80
 setlocal nonu
 set shiftwidth=4
 set tabstop=4

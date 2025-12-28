@@ -20,12 +20,15 @@ Plug 'justinmk/vim-sneak'
 Plug 'https://github.com/itchyny/lightline.vim'
 " project searcher. very simple, very useful
 Plug 'https://github.com/mileszs/ack.vim'
-" command runner
+" asynchronous command runner
 Plug 'https://github.com/skywind3000/asyncrun.vim'
 
 " UI
 Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdtree'
+" better highlighting
 Plug 'https://github.com/bfrg/vim-c-cpp-modern'
+
 " Filetypes
 Plug 'HiPhish/guile.vim'
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
@@ -33,8 +36,9 @@ Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
 
-"Lisp/Scheme
+"Lisp/Scheme: if this no longer works, then we riot, deny and then delete
 Plug 'eraserhd/parinfer-rust'
+
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
 Plug 'https://github.com/joshdick/onedark.vim'
@@ -44,7 +48,6 @@ Plug 'https://github.com/nordtheme/vim.git'
 Plug 'https://github.com/cocopon/iceberg.vim.git'
 Plug 'https://github.com/romainl/flattened'
 Plug 'https://github.com/nikolvs/vim-sunbather'
-Plug 'https://github.com/nvimdev/oceanic-material'
 Plug 'https://github.com/kratuvid/vim9-gruvbox'
 " plugins under consideration" vim-slime
 call plug#end()
@@ -220,22 +223,31 @@ noremap <Leader>qL <cmd>set background=dark<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
 noremap <Leader>f <cmd>FZF<CR>
+" git files
 noremap <Leader>F <cmd>SK<CR>
 noremap <leader>b <cmd>Buffers<CR>
 noremap <leader>B <cmd>Windows<CR>
+" search in current file
 noremap <Leader>l <cmd>BLines<CR>
+" search in all opened buffers
 noremap <Leader>L <cmd>Lines<CR>
+" search word under cursor among project files and instanly opens quickfix
 noremap <leader>a <cmd>Ack<CR>
 " ALT-A to select all ALT-D to deselect
 " use Rg <search-pattern> manually on command line
+" :RG will relaunch ripgrep on keystroke
 noremap <Leader>g <cmd>RG<CR>
 noremap <leader>m <cmd>Marks<CR>
 noremap <leader>j <cmd>Jumps<CR>
+" search available commands, switche to CMD to run and adquire further
+" arguments
 noremap <leader><C-j> <cmd>Commands<CR>
 noremap <leader>J <cmd>History<CR>
 noremap <leader>h <cmd>Helptags<CR>
 noremap <leader>H <cmd>nohlsearch<CR>
 noremap <leader>t <cmd>Tags<CR>
+
+noremap <leader>n <cmd>NERDTreeToggle<CR>
 
 noremap <Leader><Leader> <cmd>tab split<CR>
 noremap <Leader>` <cmd>tabnew<CR>
