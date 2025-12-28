@@ -4,9 +4,7 @@
 " must be listed first
 call plug#begin()
 " Essential
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'skim-rs/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'vim-fuzzbox/fuzzbox.vim'
 Plug 'https://github.com/vim-autoformat/vim-autoformat'
 " disabled in Lispy files and markdown
 Plug 'LunarWatcher/auto-pairs'
@@ -217,25 +215,27 @@ noremap <Leader>qc <cmd>Colors<CR>
 noremap <Leader>qk <cmd>Maps<CR>
 noremap <Leader>ql <cmd>set background=light<CR>
 noremap <Leader>qL <cmd>set background=dark<CR>
-" Buffer Movement
-" Homerow Maps :help fzf-vim
-noremap <Leader>f <cmd>FZF<CR>
-noremap <Leader>F <cmd>SK<CR>
-noremap <leader>b <cmd>Buffers<CR>
-noremap <leader>B <cmd>Windows<CR>
-noremap <Leader>l <cmd>BLines<CR>
-noremap <Leader>L <cmd>Lines<CR>
+
 noremap <leader>a <cmd>Ack<CR>
+noremap <leader>H <cmd>nohlsearch<CR>
+
+" FuzzBox
+noremap <Leader>f <cmd>FuzzyFiles<CR>
+noremap <Leader>F <cmd>FuzzyGitFiles<CR>
+noremap <leader>b <cmd>FuzzyBuffers<CR>
+" equivalent fo FZF :History
+noremap <leader>d <cmd>FuzzyPrevious<CR>
+noremap <leader>B <cmd>FuzzyMru<CR>
+noremap <Leader>l <cmd>FuzzyInBuffer<CR>
+" noremap <Leader>L <cmd>Lines<CR>
 " ALT-A to select all ALT-D to deselect
 " use Rg <search-pattern> manually on command line
-noremap <Leader>g <cmd>RG<CR>
-noremap <leader>m <cmd>Marks<CR>
-noremap <leader>j <cmd>Jumps<CR>
-noremap <leader><C-j> <cmd>Commands<CR>
-noremap <leader>J <cmd>History<CR>
-noremap <leader>h <cmd>Helptags<CR>
-noremap <leader>H <cmd>nohlsearch<CR>
-noremap <leader>t <cmd>Tags<CR>
+noremap <Leader>g <cmd>FuzzyGrep<CR>
+noremap <leader>m <cmd>FuzzyMarks<CR>
+noremap <leader>j <cmd>FuzzyJumps<CR>
+noremap <leader>h <cmd>FuzzyHelp<CR>
+noremap <leader>t <cmd>FuzzyTags<CR>
+noremap <leader>k <cmd>FuzzyQuickfix<CR>
 
 noremap <Leader><Leader> <cmd>tab split<CR>
 noremap <Leader>` <cmd>tabnew<CR>
