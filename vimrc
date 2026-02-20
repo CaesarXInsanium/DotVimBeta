@@ -51,9 +51,10 @@ Plug 'https://github.com/nikolvs/vim-sunbather'
 Plug 'https://github.com/kratuvid/vim9-gruvbox'
 " plugins under consideration" vim-slime
 call plug#end()
+" Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
+" global and gtags use and commands
 " Builtins
 runtime! ftplugin/man.vim
-runtime gtags
 "###############################################################################
 " Options
 "###############################################################################
@@ -66,9 +67,6 @@ set noshowmode
 set nofoldenable
 set encoding=UTF-8
 set clipboard+=unnamedplus
-
-" Buffer Tabs
-
 
 set nonu
 set rnu
@@ -248,6 +246,7 @@ noremap <leader>H <cmd>nohlsearch<CR>
 noremap <leader>t <cmd>Tags<CR>
 
 noremap <leader>n <cmd>NERDTreeToggle<CR>
+noremap <leader><C-f> <cmd>AutoFormat<CR>
 
 noremap <Leader><Leader> <cmd>tab split<CR>
 noremap <Leader>` <cmd>tabnew<CR>
