@@ -3,31 +3,34 @@
 ""##############################################################################
 " must be listed first
 call plug#begin()
-" Essential
+" Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'skim-rs/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'https://github.com/vim-autoformat/vim-autoformat'
-" disabled in Lispy files and markdown
+Plug 'https://github.com/mileszs/ack.vim'
 Plug 'LunarWatcher/auto-pairs'
-" Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-repeat'
 Plug 'luochen1990/rainbow'
 " window automatic resizing. :help lens
 Plug 'camspiers/lens.vim'
 " :help sneak
 Plug 'justinmk/vim-sneak'
-Plug 'https://github.com/itchyny/lightline.vim'
-" project searcher. very simple, very useful
-Plug 'https://github.com/mileszs/ack.vim'
-" asynchronous command runner
-Plug 'https://github.com/skywind3000/asyncrun.vim'
+" Nerd Commenter
+" Airline or powerline is the bar?
+" autopairs
+" fugitive
+" git gutter
 
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
 " better highlighting
 Plug 'https://github.com/bfrg/vim-c-cpp-modern'
+Plug 'https://github.com/itchyny/lightline.vim.git'
+
+" Programming
+" ALE to installed later
+Plug 'https://github.com/airblade/vim-gitgutter.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'dense-analysis/ale'
 
 " Filetypes
 Plug 'HiPhish/guile.vim'
@@ -36,20 +39,15 @@ Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
 
-"Lisp/Scheme: if this no longer works, then we riot, deny and then delete
-Plug 'eraserhd/parinfer-rust'
-
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
-Plug 'https://github.com/joshdick/onedark.vim'
-Plug 'ericbn/vim-solarized'
-Plug 'sainnhe/everforest'
-Plug 'https://github.com/nordtheme/vim.git'
 Plug 'https://github.com/cocopon/iceberg.vim.git'
-Plug 'https://github.com/romainl/flattened'
-Plug 'https://github.com/nikolvs/vim-sunbather'
-Plug 'https://github.com/kratuvid/vim9-gruvbox'
-" plugins under consideration" vim-slime
+Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice"
+Plug 'https://github.com/sainnhe/gruvbox-material.git'
+Plug 'https://github.com/nvimdev/oceanic-material.git'
+Plug 'https://github.com/romainl/flattened.git'
+Plug 'https://github.com/nordtheme/vim.git'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 call plug#end()
 " Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
 " global and gtags use and commands
@@ -59,7 +57,7 @@ runtime! ftplugin/man.vim
 " Options
 "###############################################################################
 set nocp
-set guifont=ZedMono\ Nerd\ Font\ 15
+set guifont=Iosevka\ Nerd\ Font\ 16.5
 set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175"
 set laststatus=2
 set noshowmode
@@ -110,17 +108,10 @@ set cursorline
 set nocursorcolumn
 set conceallevel=0
 
-" Appearance
-syntax enable
-set termguicolors
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-if !has('gui_running')
-  hi Normal guibg=NONE ctermbg=NONE
-endif
+
 "Session
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,terminal
+
 " Completion
 set nospell
 set spelllang+=en_us
@@ -130,13 +121,30 @@ set wildoptions+=fuzzy
 set completeopt+=menu,menuone,popup,noselect,noinsert
 " :help omnifunc" :help completion" Swap
 set directory=~/.cache/vim/
-"###############################################################################" Variables"###############################################################################
+
+"###############################################################################
+" APPEARANCE
+"###############################################################################
+
+" hard medium soft
+let g:everforest_background = 'hard'
+let g:everforest_better_performance = 0
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_better_performance = 1
+let g:oceanic_material_transparent_background = 1
+let g:oceanic_material_allow_bold = 1
+syntax enable
+set termguicolors
+set background=dark
+colorscheme everforest
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+"###############################################################################
 " VARIABLES
-"###############################################################################" Variables"###############################################################################
+"###############################################################################
 
-
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_compiler_method = 'pdflatex'
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:vim_asciidoctor_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:typst_folding = 1
@@ -153,9 +161,6 @@ endif
 
 let g:ft_man_open_mode = 'tab'
 
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }" Plugins
 let g:rainbow_active = 1
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
@@ -245,8 +250,7 @@ noremap <leader>h <cmd>Helptags<CR>
 noremap <leader>H <cmd>nohlsearch<CR>
 noremap <leader>t <cmd>Tags<CR>
 
-noremap <leader>n <cmd>NERDTreeToggle<CR>
-noremap <leader><C-f> <cmd>AutoFormat<CR>
+noremap <leader><C-f> <cmd>NERDTreeToggle<CR>
 
 noremap <Leader><Leader> <cmd>tab split<CR>
 noremap <Leader>` <cmd>tabnew<CR>

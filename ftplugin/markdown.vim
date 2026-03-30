@@ -3,7 +3,7 @@ setlocal spell
 setlocal textwidth=80
 setlocal colorcolumn=80
 setlocal nonu
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-let b:autopairs_enabled = 0
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+let b:autopairs_enabled = 1
