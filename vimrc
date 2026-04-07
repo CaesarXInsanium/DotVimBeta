@@ -34,6 +34,9 @@ Plug 'dense-analysis/ale'
 
 " Filetypes
 Plug 'HiPhish/guile.vim'
+" neccesary to go back to doing lisp/scheme coding
+Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
 Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/zah/nim.vim'
@@ -137,10 +140,11 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme everforest
+colorscheme flattened_light
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'flattened_light',
       \ }
+hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
 " VARIABLES
 "###############################################################################

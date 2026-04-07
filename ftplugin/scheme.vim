@@ -1,4 +1,4 @@
-let b:autopairs_enabled = 0
+let b:autopairs_enabled = 1
 
 " keyword arguments are higlighted
 syntax match GuileKeyword /\(:\)\@<=#\(\w\+\)\(:\)\@=/ contained
