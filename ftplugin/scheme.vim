@@ -1,5 +1,5 @@
-let b:autopairs_enabled = 1
-
+" autopairs can be disabled with <M-p>
+let b:AutoPairs = {}
 " keyword arguments are higlighted
 syntax match GuileKeyword /\(:\)\@<=#\(\w\+\)\(:\)\@=/ contained
 " Set highlighting group for the match

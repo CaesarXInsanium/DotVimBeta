@@ -6,19 +6,15 @@ call plug#begin()
 " Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" requires vim9
+Plug 'https://github.com/vim-fuzzbox/fuzzbox.vim.git'
+" tryouts
 Plug 'https://github.com/mileszs/ack.vim'
-Plug 'LunarWatcher/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'luochen1990/rainbow'
-" window automatic resizing. :help lens
-Plug 'camspiers/lens.vim'
 " :help sneak
 Plug 'justinmk/vim-sneak'
 " Nerd Commenter
-" Airline or powerline is the bar?
-" autopairs
-" fugitive
-" git gutter
-
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
@@ -27,20 +23,20 @@ Plug 'https://github.com/bfrg/vim-c-cpp-modern'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 
 " Programming
-" ALE to installed later
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'dense-analysis/ale'
+Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
 
 " Filetypes
 Plug 'HiPhish/guile.vim'
 " neccesary to go back to doing lisp/scheme coding
 Plug 'eraserhd/parinfer-rust', {'do':
-        \  'cargo build --release'}
+      \  'cargo build --release'}
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
 Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
+Plug 'https://github.com/fatih/vim-go.git'
 
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
@@ -51,6 +47,8 @@ Plug 'https://github.com/nvimdev/oceanic-material.git'
 Plug 'https://github.com/romainl/flattened.git'
 Plug 'https://github.com/nordtheme/vim.git'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'https://codeberg.org/mao-yining/vim-catppuccin'
+Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
 call plug#end()
 " Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
 " global and gtags use and commands
@@ -140,14 +138,18 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme flattened_light
+colorscheme everforest
 let g:lightline = {
-      \ 'colorscheme': 'flattened_light',
+      \ 'colorscheme': 'everforest',
       \ }
 hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
 " VARIABLES
 "###############################################################################
+
+" I like to have default mappings disabled, I CHOOSE the mappings.
+let g:fuzzbox_mappings = 0
+let g:gitgutter_map_keys = 0
 
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:vim_asciidoctor_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
@@ -163,7 +165,7 @@ if executable('rg')
   let g:ackprg = 'rg --vimgrep --glob=!tags'
 endif
 
-let g:ft_man_open_mode = 'tab'
+let g:ft_man_open_mode = 'vert'
 
 let g:rainbow_active = 1
 
@@ -212,6 +214,7 @@ autocmd FileType .guile set ft=scheme
 
 au FileType rust,vimscript set mps+=<:>
 au FileType lisp,scheme set mps-=':'
+au BufWrite * :Autoformat
 "##############################################################################
 "" Keybindings
 "##############################################################################
@@ -223,19 +226,20 @@ noremap <Leader>sp <cmd>PlugInstall<CR>
 noremap <Leader>sP <cmd>PlugClean<CR>
 " Vim Bindings" reload
 noremap <Leader>qr <cmd>source ~/.vim/vimrc<CR>
-noremap <Leader>qc <cmd>Colors<CR>
+noremap <Leader>qc <cmd>FuzzyColors<CR>
 noremap <Leader>qk <cmd>Maps<CR>
 noremap <Leader>ql <cmd>set background=light<CR>
 noremap <Leader>qL <cmd>set background=dark<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
-noremap <Leader>f <cmd>FZF<CR>
+noremap <Leader>f <cmd>FuzzyFiles<CR>
+noremap <Leader>F <cmd>FZF<CR>
+
 " git files
-noremap <Leader>F <cmd>SK<CR>
-noremap <leader>b <cmd>Buffers<CR>
+noremap <leader>b <cmd>FuzzyBuffers<CR>
 noremap <leader>B <cmd>Windows<CR>
 " search in current file
-noremap <Leader>l <cmd>BLines<CR>
+noremap <Leader>l <cmd>FuzzyInBuffer<CR>
 " search in all opened buffers
 noremap <Leader>L <cmd>Lines<CR>
 " search word under cursor among project files and instanly opens quickfix
@@ -243,16 +247,20 @@ noremap <leader>a <cmd>Ack<CR>
 " ALT-A to select all ALT-D to deselect
 " use Rg <search-pattern> manually on command line
 " :RG will relaunch ripgrep on keystroke
-noremap <Leader>g <cmd>RG<CR>
+noremap <Leader>g <cmd>FuzzyGrep<CR>
+noremap <leader><C-g> <cmd>FuzzyGrepRoot<CR>
+noremap <Leader>G <cmd>RG<CR>
 noremap <leader>m <cmd>Marks<CR>
 noremap <leader>j <cmd>Jumps<CR>
 " search available commands, switche to CMD to run and adquire further
 " arguments
 noremap <leader><C-j> <cmd>Commands<CR>
-noremap <leader>J <cmd>History<CR>
+" most recent file
+noremap <leader>J <cmd>FuzzyMru<CR>
 noremap <leader>h <cmd>Helptags<CR>
 noremap <leader>H <cmd>nohlsearch<CR>
-noremap <leader>t <cmd>Tags<CR>
+noremap <leader>t <cmd>FuzzyTags<CR>
+noremap <leader>. <cmd>FuzzyPrevious<CR>
 
 noremap <leader><C-f> <cmd>NERDTreeToggle<CR>
 
@@ -283,4 +291,7 @@ noremap <leader>c <cmd>copen<CR>
 noremap <leader>C <cmd>cclose<CR>
 noremap ]q <cmd>cnext<CR>
 noremap [q <cmd>cprevious<CR>
-" copy to wayland clipoard
+
+" Window Resize
+noremap <C-w>] <cmd>vertical resize +10<CR>
+noremap <C-w>[ <cmd>vertical resize -10<CR>

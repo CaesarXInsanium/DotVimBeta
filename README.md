@@ -377,6 +377,8 @@ Check user-manual 5.7, add local help for creating a help doc and help tags.
 
 ## Buffer Windows
 
+I need to learn how to handle windows.
+
 ## Language Specific
 
 ### Syntax Highlighting
