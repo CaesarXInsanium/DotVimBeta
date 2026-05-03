@@ -6,8 +6,6 @@ call plug#begin()
 " Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" requires vim9
-Plug 'https://github.com/vim-fuzzbox/fuzzbox.vim.git'
 " tryouts
 Plug 'https://github.com/mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -37,12 +35,11 @@ Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/code5717/c3.vim.git'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
-Plug 'https://github.com/fatih/vim-go.git'
 
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
 Plug 'https://github.com/cocopon/iceberg.vim.git'
-Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice"
+Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice
 Plug 'https://github.com/sainnhe/gruvbox-material.git'
 Plug 'https://github.com/nvimdev/oceanic-material.git'
 Plug 'https://github.com/romainl/flattened.git'
@@ -50,6 +47,7 @@ Plug 'https://github.com/nordtheme/vim.git'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'https://codeberg.org/mao-yining/vim-catppuccin'
 Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
+Plug 'https://codeberg.org/lifepillar/vim-solarized8.git'
 call plug#end()
 " Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
 " global and gtags use and commands
@@ -139,7 +137,7 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme flattened_dark
+colorscheme solarized8
 let g:lightline = {
       \ 'colorscheme': 'flattened_dark',
       \ }
@@ -149,7 +147,6 @@ hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
 
 " I like to have default mappings disabled, I CHOOSE the mappings.
-let g:fuzzbox_mappings = 0
 let g:gitgutter_map_keys = 0
 
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
@@ -161,6 +158,8 @@ let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_conceal = 3
 let g:markdown_folding = 6
 let g:markdown_recommended_style = 0
+let g:solarized_italics = 1
+let g:solarized_termtrans = 0
 
 if executable('rg')
   let g:ackprg = 'rg --vimgrep --glob=!tags'
@@ -169,11 +168,12 @@ endif
 let g:ft_man_open_mode = 'vert'
 
 let g:rainbow_active = 1
+let g:fzf_vim = {}
 
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
+let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
+      \ 'bg':      ['bg', '-1'],
       \ 'hl':      ['fg', 'Comment'],
       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
@@ -215,7 +215,6 @@ autocmd FileType .guile set ft=scheme
 
 au FileType rust,vimscript set mps+=<:>
 au FileType lisp,scheme set mps-=':'
-" au BufWrite * :Autoformat
 au BufWrite rust,c,zig,nim,go,markdown :Autoformat
 "##############################################################################
 "" Keybindings
@@ -228,20 +227,19 @@ noremap <Leader>sp <cmd>PlugInstall<CR>
 noremap <Leader>sP <cmd>PlugClean<CR>
 " Vim Bindings" reload
 noremap <Leader>qr <cmd>source ~/.vim/vimrc<CR>
-noremap <Leader>qc <cmd>FuzzyColors<CR>
+noremap <Leader>qc <cmd>Colors<CR>
 noremap <Leader>qk <cmd>Maps<CR>
 noremap <Leader>ql <cmd>set background=light<CR>
 noremap <Leader>qL <cmd>set background=dark<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
-noremap <Leader>f <cmd>FuzzyFiles<CR>
-noremap <Leader>F <cmd>FZF<CR>
+noremap <Leader>f <cmd>FZF<CR>
 
 " git files
-noremap <leader>b <cmd>FuzzyBuffers<CR>
+noremap <leader>b <cmd>Buffers<CR>
 noremap <leader>B <cmd>Windows<CR>
 " search in current file
-noremap <Leader>l <cmd>FuzzyInBuffer<CR>
+noremap <Leader>l <cmd>BLines<CR>
 " search in all opened buffers
 noremap <Leader>L <cmd>Lines<CR>
 " search word under cursor among project files and instanly opens quickfix
@@ -249,20 +247,18 @@ noremap <leader>a <cmd>Ack<CR>
 " ALT-A to select all ALT-D to deselect
 " use Rg <search-pattern> manually on command line
 " :RG will relaunch ripgrep on keystroke
-noremap <Leader>g <cmd>FuzzyGrep<CR>
-noremap <leader><C-g> <cmd>FuzzyGrepRoot<CR>
-noremap <Leader>G <cmd>RG<CR>
+noremap <Leader>g <cmd>RG<CR>
 noremap <leader>m <cmd>Marks<CR>
 noremap <leader>j <cmd>Jumps<CR>
 " search available commands, switche to CMD to run and adquire further
 " arguments
 noremap <leader><C-j> <cmd>Commands<CR>
 " most recent file
-noremap <leader>J <cmd>FuzzyMru<CR>
+noremap <leader>J <cmd>History<CR>
 noremap <leader>h <cmd>Helptags<CR>
 noremap <leader>H <cmd>nohlsearch<CR>
-noremap <leader>t <cmd>FuzzyTags<CR>
-noremap <leader>. <cmd>FuzzyPrevious<CR>
+noremap <leader>t <cmd>Tags<CR>
+noremap <leader>. <cmd>History/<CR>
 
 noremap <leader><C-f> <cmd>NERDTreeToggle<CR>
 
