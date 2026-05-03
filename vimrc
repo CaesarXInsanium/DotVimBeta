@@ -34,6 +34,7 @@ Plug 'eraserhd/parinfer-rust', {'do':
       \  'cargo build --release'}
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
 Plug 'https://github.com/Tetralux/odin.vim'
+Plug 'https://github.com/code5717/c3.vim.git'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
 Plug 'https://github.com/fatih/vim-go.git'
@@ -138,9 +139,9 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme everforest
+colorscheme flattened_dark
 let g:lightline = {
-      \ 'colorscheme': 'everforest',
+      \ 'colorscheme': 'flattened_dark',
       \ }
 hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
@@ -214,7 +215,8 @@ autocmd FileType .guile set ft=scheme
 
 au FileType rust,vimscript set mps+=<:>
 au FileType lisp,scheme set mps-=':'
-au BufWrite * :Autoformat
+" au BufWrite * :Autoformat
+au BufWrite rust,c,zig,nim,go,markdown :Autoformat
 "##############################################################################
 "" Keybindings
 "##############################################################################
