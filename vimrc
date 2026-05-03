@@ -103,7 +103,6 @@ if has('mouse')
   set mouse=nva
 endif
 " Guides
-set colorcolumn=80
 set cursorline
 set nocursorcolumn
 set conceallevel=0
@@ -118,8 +117,10 @@ set spelllang+=en_us
 set dictionary+=spell
 set wildmenu
 set wildoptions+=fuzzy
-set completeopt+=menu,menuone,popup,noselect,noinsert
 " :help omnifunc" :help completion" Swap
+set completeopt+=menu,menuone,popup,noselect,noinsert
+
+" place where to place the backups
 set directory=~/.cache/vim/
 
 "###############################################################################
@@ -171,9 +172,15 @@ let g:rainbow_active = 1
 let g:fzf_vim = {}
 
 let g:fzf_layout = { 'window': '-tabnew' }
+let g:terminal_ansi_colors = [
+  \ '#4e4e4e', '#d68787', '#5f865f', '#d8af5f',
+  \ '#85add4', '#d7afaf', '#87afaf', '#d0d0d0',
+  \ '#626262', '#d75f87', '#87af87', '#ffd787',
+  \ '#add4fb', '#ffafaf', '#87d7d7', '#e4e4e4'
+\ ]
 let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', '-1'],
+      \ 'bg':      ['bg', 'Normal'],
       \ 'hl':      ['fg', 'Comment'],
       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
@@ -185,6 +192,19 @@ let g:fzf_colors =
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
+" this beautiful line makes the fzf transperant. YESSSSSS
+" it really is beautiful
+highlight! link Terminal Normal
+" -- bellow is useful but not really
+" au Colorscheme * :hi Normal ctermbg=NONE guibg=NONE
+" these colors only matter in :term, no they don't since of above line of
+" highlight link
+let g:terminal_ansi_colors = [
+  \ '#4e4e4e', '#d68787', '#5f865f', '#d8af5f',
+  \ '#85add4', '#d7afaf', '#87afaf', '#d0d0d0',
+  \ '#626262', '#d75f87', '#87af87', '#ffd787',
+  \ '#add4fb', '#ffafaf', '#87d7d7', '#e4e4e4'
+\ ]
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val, "lnum": 1 }'))
