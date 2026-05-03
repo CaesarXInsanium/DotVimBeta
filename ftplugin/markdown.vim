@@ -1,4 +1,5 @@
-setlocal conceallevel=2
+setlocal foldenable
+setlocal conceallevel=3
 setlocal spell
 setlocal textwidth=80
 setlocal colorcolumn=80
