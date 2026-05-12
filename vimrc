@@ -35,6 +35,7 @@ Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/code5717/c3.vim.git'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
+Plug 'https://github.com/janet-lang/janet.vim'
 
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
@@ -159,6 +160,7 @@ let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_conceal = 3
 let g:markdown_folding = 6
 let g:markdown_recommended_style = 0
+let g:hare_recommended_style = 0
 let g:solarized_italics = 1
 let g:solarized_termtrans = 0
 
