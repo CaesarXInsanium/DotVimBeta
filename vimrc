@@ -3,31 +3,25 @@
 ""##############################################################################
 " must be listed first
 call plug#begin()
-" Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" tryouts
 Plug 'https://github.com/mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'luochen1990/rainbow'
-" :help sneak
-Plug 'justinmk/vim-sneak'
-" Nerd Commenter
+
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
-" better highlighting
-Plug 'https://github.com/bfrg/vim-c-cpp-modern'
-Plug 'https://github.com/itchyny/lightline.vim.git'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Programming
 Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
 
 " Filetypes
+Plug 'https://github.com/neovimhaskell/haskell-vim'
 Plug 'HiPhish/guile.vim'
-" neccesary to go back to doing lisp/scheme coding
 Plug 'eraserhd/parinfer-rust', {'do':
       \  'cargo build --release'}
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
@@ -45,10 +39,11 @@ Plug 'https://github.com/sainnhe/gruvbox-material.git'
 Plug 'https://github.com/nvimdev/oceanic-material.git'
 Plug 'https://github.com/romainl/flattened.git'
 Plug 'https://github.com/nordtheme/vim.git'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'https://codeberg.org/mao-yining/vim-catppuccin'
 Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
 Plug 'https://codeberg.org/lifepillar/vim-solarized8.git'
+Plug 'https://github.com/tyrannicaltoucan/vim-deep-space'
+Plug 'https://github.com/rakr/vim-one.git'
 call plug#end()
 " Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
 " global and gtags use and commands
@@ -67,7 +62,6 @@ set nofoldenable
 set encoding=UTF-8
 set clipboard+=unnamedplus
 
-set nonu
 set rnu
 " Text Tabs
 set shiftwidth=2
@@ -139,10 +133,7 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme ayu
-let g:lightline = {
-      \ 'colorscheme': 'ayu',
-      \ }
+colorscheme one
 hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
 " VARIABLES
@@ -279,7 +270,6 @@ noremap <leader><C-j> <cmd>Commands<CR>
 noremap <leader>J <cmd>History<CR>
 noremap <leader>h <cmd>Helptags<CR>
 noremap <leader>H <cmd>nohlsearch<CR>
-noremap <leader>t <cmd>Tags<CR>
 noremap <leader>. <cmd>History/<CR>
 
 noremap <leader><C-f> <cmd>NERDTreeToggle<CR>
