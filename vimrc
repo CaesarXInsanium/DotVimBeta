@@ -159,7 +159,7 @@ if executable('rg')
   let g:ackprg = 'rg --vimgrep --glob=!tags'
 endif
 
-let g:ft_man_open_mode = 'vert'
+let g:ft_man_open_mode = 'tab'
 
 let g:rainbow_active = 1
 let g:fzf_vim = {}
@@ -213,22 +213,17 @@ let g:fzf_action = {
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'man']
 let g:indent_guides_default_mapping = 0
 
-let g:sexp_enable_insert_mode_mappings = 0
 "###############################################################################
 "" Autocommands
 "###############################################################################
 " see :help autogroup
-augroup vimrcEx" autocmd
-au!
-autocmd FileType text setlocal textwidth=80
-augroup END
 
 autocmd FileType .guile set ft=scheme
 " augroup vimreload"  au!"  echo "Call PlugInstall"" augroup END
 
 au FileType rust,vimscript set mps+=<:>
 au FileType lisp,scheme set mps-=':'
-au BufWrite rust,c,zig,nim,go,markdown :Autoformat
+" au BufWrite rust,c,zig,nim,go,markdown :Autoformat
 "##############################################################################
 "" Keybindings
 "##############################################################################
