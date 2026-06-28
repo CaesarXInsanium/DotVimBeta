@@ -1,6 +1,3 @@
 setlocal nu
 setlocal keywordprg=:Man\ 3
-augroup cvim
-  autocmd! BufWritePre <buffer>
-  autocmd BufWritePre <buffer> :Autoformat
-augroup END
+setlocal colorcolumn+=80

@@ -1,23 +1,21 @@
-"##############################################################################"
+"##############################################################################
 " Plugins
-""##############################################################################
+"##############################################################################
 " must be listed first
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'luochen1990/rainbow'
+Plug 'justinmk/vim-sneak'
+Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
+Plug 'skywind3000/asyncrun.vim'
 
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Programming
-Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
+Plug 'luochen1990/rainbow'
+Plug 'itchyny/lightline.vim'
 
 " Filetypes
 Plug 'https://github.com/neovimhaskell/haskell-vim'
@@ -38,7 +36,6 @@ Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice
 Plug 'https://github.com/sainnhe/gruvbox-material.git'
 Plug 'https://github.com/nvimdev/oceanic-material.git'
 Plug 'https://github.com/romainl/flattened.git'
-Plug 'https://github.com/nordtheme/vim.git'
 Plug 'https://codeberg.org/mao-yining/vim-catppuccin'
 Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
 Plug 'https://codeberg.org/lifepillar/vim-solarized8.git'
@@ -132,15 +129,17 @@ let g:oceanic_material_transparent_background = 1
 let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
-set background=dark
-colorscheme one
-hi Normal ctermbg=NONE guibg=NONE
+set background=light
+colorscheme iceberg
+let g:lightline = {
+      \ 'colorscheme': 'iceberg',
+      \ }
+" hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
 " VARIABLES
 "###############################################################################
 
 " I like to have default mappings disabled, I CHOOSE the mappings.
-let g:gitgutter_map_keys = 0
 
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:vim_asciidoctor_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
