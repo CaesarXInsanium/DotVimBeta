@@ -129,10 +129,10 @@ let g:oceanic_material_transparent_background = 1
 let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
-set background=light
-colorscheme iceberg
+set background=dark
+colorscheme everforest
 let g:lightline = {
-      \ 'colorscheme': 'iceberg',
+      \ 'colorscheme': 'everforest',
       \ }
 " hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
