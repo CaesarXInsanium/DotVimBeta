@@ -9,10 +9,9 @@ Working on other things. Thing to take notes on.
 - QF list preview
 - move this repo to NOT github
 
-I will now be trying to master the vim text editor for real now. I think I
-should not try and
+I will now be trying to master the vim text editor for real now. 
 
-I did not that the current buffer can be printed. It will render it that same way
+I did not know that the current buffer can be printed. It will render it that same way
 as the vim editor itself
 
 There might be a new version of this doc with Neovim Specific stuff

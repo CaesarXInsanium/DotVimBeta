@@ -6,3 +6,5 @@ syntax match GuileKeyword /\(:\)\@<=#\(\w\+\)\(:\)\@=/ contained
 syntax match guileSyntax "define-exception-type"
 syntax match guileSyntax "define-module"
 syntax match guileSyntax "use-modules"
+
+setlocal colorcolumn+=80

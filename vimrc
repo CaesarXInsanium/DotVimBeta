@@ -14,8 +14,8 @@ Plug 'skywind3000/asyncrun.vim'
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
-Plug 'luochen1990/rainbow'
 Plug 'itchyny/lightline.vim'
+Plug 'https://github.com/luochen1990/rainbow.git'
 
 " Filetypes
 Plug 'https://github.com/neovimhaskell/haskell-vim'
@@ -36,7 +36,6 @@ Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice
 Plug 'https://github.com/sainnhe/gruvbox-material.git'
 Plug 'https://github.com/nvimdev/oceanic-material.git'
 Plug 'https://github.com/romainl/flattened.git'
-Plug 'https://codeberg.org/mao-yining/vim-catppuccin'
 Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
 Plug 'https://codeberg.org/lifepillar/vim-solarized8.git'
 Plug 'https://github.com/tyrannicaltoucan/vim-deep-space'
@@ -59,7 +58,9 @@ set nofoldenable
 set encoding=UTF-8
 set clipboard+=unnamedplus
 
+set nu
 set rnu
+
 " Text Tabs
 set shiftwidth=2
 set tabstop=2
@@ -125,21 +126,18 @@ let g:everforest_better_performance = 0
 " Available values: 'hard', 'medium'(default), 'soft'
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_better_performance = 1
-let g:oceanic_material_transparent_background = 1
 let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme everforest
+colorscheme solarized8
 let g:lightline = {
-      \ 'colorscheme': 'everforest',
+      \ 'colorscheme': 'flattened_dark',
       \ }
-" hi Normal ctermbg=NONE guibg=NONE
+hi Normal ctermbg=NONE guibg=NONE
 "###############################################################################
 " VARIABLES
 "###############################################################################
-
-" I like to have default mappings disabled, I CHOOSE the mappings.
 
 let g:vim_markdown_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
 let g:vim_asciidoctor_fenced_languages = ['csharp=cs,scheme,c,rust,nim,zig,go,lisp,cpp,python,clojure,bash,sh,vimscript']
@@ -147,12 +145,14 @@ let g:typst_folding = 1
 let g:asciidoc_folding = 1
 let g:vim_markdown_auto_insert_bullets = 1
 let g:vim_markdown_new_list_item_indent = 2
-let g:vim_markdown_conceal = 3
+let g:vim_markdown_conceal = 1
 let g:markdown_folding = 6
 let g:markdown_recommended_style = 0
+let g:filetype_md = 'pandoc'
 let g:hare_recommended_style = 0
 let g:solarized_italics = 1
 let g:solarized_termtrans = 0
+let g:rainbow_active=1
 
 if executable('rg')
   let g:ackprg = 'rg --vimgrep --glob=!tags'
@@ -160,7 +160,6 @@ endif
 
 let g:ft_man_open_mode = 'tab'
 
-let g:rainbow_active = 1
 let g:fzf_vim = {}
 
 let g:fzf_layout = { 'window': '-tabnew' }
@@ -240,7 +239,8 @@ noremap <Leader>ql <cmd>set background=light<CR>
 noremap <Leader>qL <cmd>set background=dark<CR>
 " Buffer Movement
 " Homerow Maps :help fzf-vim
-noremap <Leader>f <cmd>FZF<CR>
+noremap <Leader>f <cmd>Files<CR>
+noremap <Leader>F <cmd>FZF<CR>
 
 " git files
 noremap <leader>b <cmd>Buffers<CR>
@@ -297,5 +297,11 @@ noremap ]q <cmd>cnext<CR>
 noremap [q <cmd>cprevious<CR>
 
 " Window Resize
-noremap <C-w>] <cmd>vertical resize +10<CR>
-noremap <C-w>[ <cmd>vertical resize -10<CR>
+noremap <C-w>] <cmd>vertical resize +5<CR>
+noremap <C-w>[ <cmd>vertical resize -5<CR>
+noremap <leader>w <cmd>vertical resize 86<CR>
+noremap <C-w><Space> <cmd>vertical resize 87<CR>
+" Command mode history cycling. use q: for full vim editing
+"
+" Escape normal
+inoremap <C-f> <Esc>
