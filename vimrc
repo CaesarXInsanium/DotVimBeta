@@ -1,7 +1,7 @@
 "##############################################################################
 " Plugins
 "##############################################################################
-" must be listed first
+
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -130,11 +130,12 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme solarized8
+colorscheme ayu
 let g:lightline = {
-      \ 'colorscheme': 'flattened_dark',
+      \ 'colorscheme': 'ayu',
       \ }
 hi Normal ctermbg=NONE guibg=NONE
+
 "###############################################################################
 " VARIABLES
 "###############################################################################
