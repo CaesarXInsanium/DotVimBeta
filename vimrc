@@ -8,15 +8,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-sneak'
-Plug 'https://github.com/vim-autoformat/vim-autoformat.git'
 Plug 'skywind3000/asyncrun.vim'
 
 " UI
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
-Plug 'itchyny/lightline.vim'
 Plug 'https://github.com/luochen1990/rainbow.git'
 
+" Lsp
+Plug 'https://github.com/dense-analysis/ale.git'
 " Filetypes
 Plug 'https://github.com/neovimhaskell/haskell-vim'
 Plug 'HiPhish/guile.vim'
@@ -34,12 +34,14 @@ Plug 'https://github.com/ayu-theme/ayu-vim.git'
 Plug 'https://github.com/cocopon/iceberg.vim.git'
 Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice
 Plug 'https://github.com/sainnhe/gruvbox-material.git'
-Plug 'https://github.com/nvimdev/oceanic-material.git'
 Plug 'https://github.com/romainl/flattened.git'
 Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
 Plug 'https://codeberg.org/lifepillar/vim-solarized8.git'
-Plug 'https://github.com/tyrannicaltoucan/vim-deep-space'
 Plug 'https://github.com/rakr/vim-one.git'
+Plug 'https://github.com/drewtempelmeyer/palenight.vim.git'
+Plug 'https://github.com/srcery-colors/srcery-vim'
+Plug 'https://github.com/enescala/tokyonight-vim9'
+Plug 'https://github.com/catppuccin/vim.git'
 call plug#end()
 " Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
 " global and gtags use and commands
@@ -130,10 +132,7 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme ayu
-let g:lightline = {
-      \ 'colorscheme': 'ayu',
-      \ }
+colorscheme solarized8
 hi Normal ctermbg=NONE guibg=NONE
 
 "###############################################################################
