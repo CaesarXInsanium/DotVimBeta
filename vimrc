@@ -14,11 +14,9 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
 Plug 'https://github.com/luochen1990/rainbow.git'
+Plug 'https://github.com/itchyny/lightline.vim.git'
 
-" Lsp
-Plug 'https://github.com/dense-analysis/ale.git'
 " Filetypes
-Plug 'https://github.com/neovimhaskell/haskell-vim'
 Plug 'HiPhish/guile.vim'
 Plug 'eraserhd/parinfer-rust', {'do':
       \  'cargo build --release'}
@@ -27,21 +25,14 @@ Plug 'https://github.com/Tetralux/odin.vim'
 Plug 'https://github.com/code5717/c3.vim.git'
 Plug 'https://github.com/zah/nim.vim'
 Plug 'https://github.com/kaarmu/typst.vim'
-Plug 'https://github.com/janet-lang/janet.vim'
 
 " Colorschemes
 Plug 'https://github.com/ayu-theme/ayu-vim.git'
-Plug 'https://github.com/cocopon/iceberg.vim.git'
 Plug 'https://github.com/sainnhe/everforest.git' "dark version is nice
 Plug 'https://github.com/sainnhe/gruvbox-material.git'
 Plug 'https://github.com/romainl/flattened.git'
-Plug 'https://github.com/kratuvid/vim9-gruvbox.git'
 Plug 'https://codeberg.org/lifepillar/vim-solarized8.git'
-Plug 'https://github.com/rakr/vim-one.git'
 Plug 'https://github.com/drewtempelmeyer/palenight.vim.git'
-Plug 'https://github.com/srcery-colors/srcery-vim'
-Plug 'https://github.com/enescala/tokyonight-vim9'
-Plug 'https://github.com/catppuccin/vim.git'
 call plug#end()
 " Remember that plugins/gtags.vim provides :Gtags command. Which allows use of
 " global and gtags use and commands
@@ -51,7 +42,7 @@ runtime! ftplugin/man.vim
 " Options
 "###############################################################################
 set nocp
-set guifont=Iosevka\ Nerd\ Font\ 16.5
+set guifont=Caskaydia\ Cove\ Nerd\ Font\ 15.5
 set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175"
 set laststatus=2
 set noshowmode
@@ -132,8 +123,15 @@ let g:oceanic_material_allow_bold = 1
 syntax enable
 set termguicolors
 set background=dark
-colorscheme solarized8
-hi Normal ctermbg=NONE guibg=NONE
+let g:lightline = {
+      \ 'colorscheme': 'ayu',
+      \ }
+if has('gui_running')  
+  colorscheme ayu
+  else  
+  colorscheme ayu
+  hi Normal ctermbg=NONE guibg=NONE
+endif
 
 "###############################################################################
 " VARIABLES
@@ -158,7 +156,7 @@ if executable('rg')
   let g:ackprg = 'rg --vimgrep --glob=!tags'
 endif
 
-let g:ft_man_open_mode = 'tab'
+let g:ft_man_open_mode = 'vert'
 
 let g:fzf_vim = {}
 

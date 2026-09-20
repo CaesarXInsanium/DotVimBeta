@@ -1,4 +1,1 @@
-augroup rustvim
-  autocmd! BufWritePre <buffer>
-  autocmd BufWritePre <buffer> :Autoformat
-augroup END
+setlocal colorcolumn+=80
